@@ -1,1 +1,1 @@
-# shoppingMall_jsp_project
+# Shopping_mall_jsp_project
