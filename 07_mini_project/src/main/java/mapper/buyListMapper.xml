@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BuyListMapper">
+	<insert id="reg" parameterType="buyVO">
+		insert into buylist (buyer,pno)
+		values (#{buyer}, #{pno})
+	</insert>
+	<select id="list" parameterType="string" resultType="buyVO">
+		select m.id, m.address, p.pno, p.pname, p.price ,b.buy_date
+		from buylist b join member m
+		on b.buyer = m.id
+		join product p
+		on b.pno = p.pno
+		where m.id = #{id}
+		order by b.buy_date desc
+	</select>
+	<select id="listAll"  resultType="buyVO">
+		select m.id, m.address, p.pno, p.pname, p.price ,b.buy_date
+		from buylist b join member m
+		on buyer = id
+		join product p
+		on b.pno = p.pno
+		order by b.buy_date desc
+	</select>
+	<delete id="delAll" parameterType="string">
+	delete from buylist 
+	where buyer = #{id}
+	</delete>
+</mapper>

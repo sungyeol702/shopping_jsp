@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+<insert id="reg" parameterType="pvo">
+insert into product (pname, price, category, description)
+values (#{pname}, #{price}, #{category}, #{description})
+</insert>
+<select id="list" resultType="pvo">
+select pno, pname, price, reg_at,category
+from product
+order by reg_at desc, price
+</select>
+<select id="catelist" resultType="pvo" parameterType="string">
+select pno, pname, price, reg_at, category
+from product
+where category = #{category}
+order by reg_at desc, price
+</select>
+<select id="detail" parameterType="int" resultType="pvo">
+select * from product
+where pno = #{pno}
+</select>
+<update id="mod" parameterType="pvo">
+update product set pname = #{pname}, price = #{price},
+category = #{category}, description = #{description}, mod_at = now()
+where pno = #{pno}
+</update>
+<delete id="del" parameterType="int">
+delete from product where pno = #{pno}
+</delete>
+
+</mapper>
